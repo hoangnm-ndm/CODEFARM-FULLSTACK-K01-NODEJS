@@ -12,7 +12,6 @@ export const getDetailProduct = (req, res) => {
 export const createProduct = (req, res) => {
   console.log("tao moi san pham")
   return res.send("tao moi san pham")
-
 }
 
 export const updateProduct = (req, res) => {

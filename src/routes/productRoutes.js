@@ -4,9 +4,9 @@ import { createProduct, deleteProduct, getDetailProduct, getListProduct, updateP
 const productRoutes = Router()
 
 productRoutes.get("/", getListProduct)
-productRoutes.get("/:id", getDetailProduct) //detail
-productRoutes.post("/", createProduct) // them
-productRoutes.patch("/:id", updateProduct) // cap nhat
-productRoutes.delete("/:id", deleteProduct) // delete
+productRoutes.get("/:id", getDetailProduct)
+productRoutes.post("/", createProduct)
+productRoutes.patch("/:id", updateProduct)
+productRoutes.delete("/:id", deleteProduct)
 
 export default productRoutes
