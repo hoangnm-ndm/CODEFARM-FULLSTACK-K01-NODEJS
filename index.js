@@ -1,8 +1,9 @@
 import express from 'express';
 import router from './src/routes/index.js';
+import connectDB from './src/configs/db.js';
+import { HOST, PORT } from './src/configs/enviroments.js';
 
-const hostname = '127.0.0.1';
-const port = 3000;
+connectDB()
 
 const app = express();
 
@@ -10,6 +11,6 @@ app.use(express.json())
 
 app.use("/api", router)
 
-app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server running at http://${HOST}:${PORT}/`);
 });
