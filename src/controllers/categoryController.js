@@ -1,12 +1,11 @@
 import Category from "../models/Category"
-import createError from "../utils/error"
 import handleAsync from "../utils/handleAsync"
 import createResponse from "../utils/response"
+import createError from "../utils/error"
 
 export const createCategory = handleAsync( async (req, res, next) => {
+    const existing = await Category.findOne({ title: req.body.title })
+    if(existing) return next(createError(400, "This category already exists!"))
     const data = await Category.create(req.body)
-    if(data) {
-      return createResponse(true, 201, "Create Category successfully!", data)
-    }
-    next(createError(400, "Create Category failed!"))
+    return res.json(createResponse(true, 201, "Create Category successfully!", data))
 })
