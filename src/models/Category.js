@@ -14,6 +14,10 @@ const categorySchema = new Schema({
     type: String,
     unique: true,
     required: true
+  },
+  deletedAt: {
+    type: Date,
+    default: null
   }
 }, {versionKey: false, timestamps: true})
 
