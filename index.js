@@ -1,19 +1,19 @@
-import express from 'express';
-import router from './src/routes/index.js';
-import connectDB from './src/configs/db.js';
-import { HOST, PORT } from './src/configs/enviroments.js';
-import errorHandler from './src/middlewares/errorHandle.js';
+import express from "express";
+import connectDB from "./src/common/configs/connectDB.js";
+import { PORT, HOST } from "./src/common/configs/enviroments.js";
+import router from "./src/routes/index.js";
+import errorHandler from "./src/common/middlewares/errorHandle.js";
 
-connectDB()
+connectDB();
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
-app.use("/api", router)
+app.use("/api", router);
 
-app.use(errorHandler)
+app.use(errorHandler);
 
 app.listen(PORT, HOST, () => {
-  console.log(`Server running at http://${HOST}:${PORT}/`);
+	console.log(`Server running at http://${HOST}:${PORT}/`);
 });
