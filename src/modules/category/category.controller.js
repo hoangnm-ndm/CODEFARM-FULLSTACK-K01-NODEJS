@@ -19,21 +19,21 @@ export const getListCategory = handleAsync(async (req, res, next) => {
 export const getDetailCategory = handleAsync(async (req, res, next) => {
 	const data = await Category.findById(req.params.id);
 	if (!data) {
-		next(createError(404, "Category not found!"));
+		next(createError(404, MESSAGES.CATEGORY.NOT_FOUND));
 	}
-	return res.json(createResponse(true, 200, "Get detail category successfully!", data));
+	return res.json(createResponse(true, 200, MESSAGES.CATEGORY.GET_SUCCESS, data));
 });
 
 export const updateCategory = handleAsync(async (req, res, next) => {
 	const data = await Category.findByIdAndUpdate(req.params.id, req.body);
-	if (data) return res.json(createResponse(true, 200, "Update category successfully!", data));
+	if (data) return res.json(createResponse(true, 200, MESSAGES.CATEGORY.UPDATE_SUCCESS, data));
 	next(createError(false, 404, "Category update failed!"));
 });
 
 export const deleteCategory = handleAsync(async (req, res, next) => {
 	const data = await Category.findByIdAndDelete(id);
-	if (data) return res.json(createResponse(true, 200, "Delete successfully!"));
-	next(createError(false, 404, "Category delete failed!"));
+	if (data) return res.json(createResponse(true, 200, MESSAGES.CATEGORY.DELETE_SUCCESS, data));
+	next(createError(false, 404, MESSAGES.CATEGORY.NOT_FOUND));
 });
 
 export const softDeleteCategory = handleAsync(async (req, res, next) => {
@@ -45,9 +45,9 @@ export const softDeleteCategory = handleAsync(async (req, res, next) => {
 				deletedAt: new Date(),
 			}
 		);
-		return res.json(createResponse(true, 200, "Hidden category successfully!"));
+		return res.json(createResponse(true, 200, MESSAGES.CATEGORY.SOFT_DELETE_SUCCESS));
 	}
-	next(createError(false, 404, "Hidden category failed!"));
+	next(createError(false, 404, MESSAGES.CATEGORY.SOFT_DELETE_FAILED));
 });
 
 export const restoreCategory = handleAsync(async (req, res, next) => {
@@ -60,7 +60,7 @@ export const restoreCategory = handleAsync(async (req, res, next) => {
 			}
 		);
 		// ne = not equal
-		return res.json(createResponse(true, 200, "Restore category successfully!"));
+		return res.json(createResponse(true, 200, MESSAGES.CATEGORY.RESTORE_SUCCESS));
 	}
-	next(createError(false, 404, "Restore category failed!"));
+	next(createError(false, 404, MESSAGES.CATEGORY.RESTORE_FAILED));
 });
