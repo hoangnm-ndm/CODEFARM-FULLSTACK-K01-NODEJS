@@ -92,6 +92,7 @@ const MESSAGES = {
 		CREATE_ERROR_EXISTS: "Danh mục con đã tồn tại",
 		NOT_FOUND: "Không tìm thấy danh mục con",
 		HAS_PRODUCTS: "Danh mục này có sản phẩm, không thể xóa",
+		CREATE_ERROR_PARENT_ID: "Danh mục cha là bắt buộc",
 	},
 
 	ATTRIBUTE: {
