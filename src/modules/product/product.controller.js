@@ -1,28 +1,21 @@
-export const getListProduct = (req, res) => {
-	console.log("danh sach san pham");
-	return res.send("danh sach san pham");
-};
+import createError from "../../common/utils/error.js";
+import createResponse from "../../common/utils/response.js";
+import handleAsync from "../../common/utils/handleAsync.js";
+import MESSAGES from "../../common/contstants/messages.js";
+import Product from "./product.model.js";
 
-export const getDetailProduct = (req, res) => {
-	console.log("chi tiet san pham");
-	return res.send("chi tiet san pham");
-};
-
-export const createProduct = async (req, res) => {
-	try {
-		console.log("tao moi san pham");
-		return res.send("tao moi san pham");
-	} catch (error) {
-		console.log(error);
+export const getListProduct = handleAsync(async (req, res, next) => {
+	const data = await Product.find().populate("subCategory");
+	if (!data || data.length === 0) {
+		return next(createError(404, MESSAGES.PRODUCT.NOT_FOUND));
 	}
-};
+	return res.json(createResponse(true, 200, MESSAGES.PRODUCT.GET_SUCCESS, data));
+});
 
-export const updateProduct = (req, res) => {
-	console.log("cap nhat san pham");
-	return res.send("cap nhat san pham");
-};
-
-export const deleteProduct = (req, res) => {
-	console.log("xoa san pham");
-	return res.send("xoa san pham");
-};
+export const getDetailProduct = handleAsync(async (req, res, next) => {
+	const data = await Product.findById(req.params.id).populate("category").populate("subCategory");
+	if (!data) {
+		return next(createError(404, MESSAGES.PRODUCT.NOT_FOUND));
+	}
+	return res.json(createResponse(true, 200, MESSAGES.PRODUCT.GET_SUCCESS, data));
+});
