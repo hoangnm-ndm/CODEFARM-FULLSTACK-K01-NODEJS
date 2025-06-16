@@ -1,4 +1,4 @@
-import Category from "./category.model";
+import Category from "./category.model.js";
 import createError from "../../common/utils/error.js";
 import createResponse from "../../common/utils/response.js";
 import handleAsync from "../../common/utils/handleAsync.js";
