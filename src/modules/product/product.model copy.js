@@ -22,8 +22,15 @@ const productSchema = new mongoose.Schema(
 		soldCount: { type: Number, default: 0 },
 		variants: [
 			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "Variant",
+				options: [
+					{
+						attribute: { type: String, required: true },
+						attributeValue: { type: String, required: true },
+					},
+				],
+				stock: { type: Number, default: 0 },
+				price: { type: Number, default: 0 },
+				images: { type: [String], default: [] },
 			},
 		],
 		seoTitle: { type: String, default: "" },
