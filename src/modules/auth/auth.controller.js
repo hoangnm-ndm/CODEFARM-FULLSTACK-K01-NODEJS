@@ -5,7 +5,13 @@ import User from "../user/user.model.js";
 import createError from "../../common/utils/error.js";
 import MESSAGES from "../../common/contstants/messages.js";
 import createResponse from "../../common/utils/response.js";
-import { JWT_EXPIRES_IN, JWT_SECRET_KEY } from "../../common/configs/environments.js";
+import {
+	JWT_EXPIRES_IN,
+	JWT_SECRET_KEY,
+	JWT_SECRET_KEY_FOR_EMAIL,
+	JWT_EXPIRES_IN_FOR_EMAIL,
+} from "../../common/configs/environments.js";
+import sendEmail from "../../common/utils/mailSender.js";
 
 export const authRegister = handleAsync(async (req, res, next) => {
 	const { email, password } = req.body;
@@ -26,6 +32,29 @@ export const authRegister = handleAsync(async (req, res, next) => {
 	if (!newUser) {
 		return next(createError(500, MESSAGES.AUTH.REGISTER_FAILED));
 	}
+
+	// * Verify email
+	const verifyEmailToken = jwt.sign({ id: newUser._id }, JWT_SECRET_KEY_FOR_EMAIL, {
+		expiresIn: JWT_EXPIRES_IN_FOR_EMAIL,
+	});
+
+	const verifyEmailLink = `http://localhost:8888/api/auth/verify-email/${verifyEmailToken}`;
+
+	sendEmail(
+		newUser.email,
+		"Verify your email",
+		`
+      Xin chao ${newUser.fullName || "User"},);
+      Vui long click vào link dưới đây để xác thực email của bạn:
+      <a href="${verifyEmailLink}">Xác thực email</a>
+      <br>
+      Nếu bạn không đăng ký tài khoản này, vui lòng bỏ qua email này.
+      <br>
+      Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!
+  `
+	).catch((error) => {
+		return next(createError(500, `Gửi email xác thực thất bại: ${error.message}`));
+	});
 
 	// * Response
 	newUser.password = undefined;
@@ -56,3 +85,11 @@ export const authLogin = handleAsync(async (req, res, next) => {
 
 	return next(createError(500, MESSAGES.AUTH.LOGIN_FAILED));
 });
+
+export const authLogout = handleAsync(async (req, res, next) => {});
+
+export const authRefreshToken = handleAsync(async (req, res, next) => {});
+
+export const authForgotPassword = handleAsync(async (req, res, next) => {});
+
+export const authResetPassword = handleAsync(async (req, res, next) => {});

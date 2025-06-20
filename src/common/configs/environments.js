@@ -8,4 +8,13 @@ dotenv.config({
 	// expand: true,   // 👉 Chỉ khả dụng nếu bạn dùng thêm gói dotenv-expand
 });
 
-export const { DB_URI, HOST, PORT, JWT_SECRET_KEY, JWT_EXPIRES_IN } = process.env;
+export const {
+	DB_URI,
+	HOST,
+	PORT,
+	JWT_SECRET_KEY,
+	JWT_EXPIRES_IN,
+	EMAIL_PASSWORD,
+	JWT_SECRET_KEY_FOR_EMAIL,
+	JWT_EXPIRES_IN_FOR_EMAIL,
+} = process.env;
