@@ -17,6 +17,7 @@ const MESSAGES = {
 		EMAIL_NOT_VERIFIED: "Email chưa được xác minh",
 		EMAIL_VERIFIED: "Email đã được xác minh",
 		PASSWORD_RESET_SUCCESS: "Đặt lại mật khẩu thành công",
+		USER_NOT_EXIST: "Người dùng không tồn tại",
 		PASSWORD_RESET_FAILED: "Đặt lại mật khẩu thất bại, vui lòng thử lại",
 		PASSWORD_CHANGE_SUCCESS: "Đổi mật khẩu thành công",
 		PASSWORD_CHANGE_FAILED: "Đổi mật khẩu thất bại, vui lòng thử lại",
