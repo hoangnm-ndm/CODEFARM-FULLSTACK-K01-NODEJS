@@ -1,11 +1,12 @@
 import nodemailer from "nodemailer";
 import createError from "./error.js";
+import { EMAIL_PASSWORD } from "../configs/environments.js";
 
 const sendEmail = async (email, subject, text) => {
 	const transporter = nodemailer.createTransport({
 		service: "gmail",
 		auth: {
-			user: "thayhoangjs@gmail.com",
+			user: "hoangnm.ndm@gmail.com",
 			pass: EMAIL_PASSWORD,
 		},
 	});

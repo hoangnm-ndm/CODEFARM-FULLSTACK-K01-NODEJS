@@ -52,9 +52,7 @@ export const authRegister = handleAsync(async (req, res, next) => {
       <br>
       Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!
   `
-	).catch((error) => {
-		return next(createError(500, `Gửi email xác thực thất bại: ${error.message}`));
-	});
+	);
 
 	// * Response
 	newUser.password = undefined;
