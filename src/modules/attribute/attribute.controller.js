@@ -1,6 +1,6 @@
 import handleAsync from "../../common/utils/handleAsync";
 
-export const getAllAttributeByProducctId = handleAsync(async (req, res, next) => {});
+export const getAllAttribute = handleAsync(async (req, res, next) => {});
 
 export const getAttributeById = handleAsync(async (req, res, next) => {});
 

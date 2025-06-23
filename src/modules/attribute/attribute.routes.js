@@ -1,19 +1,19 @@
 import { Router } from "express";
+import validBodyRequest from "../../common/middlewares/validBodyRequest";
 import {
 	createAttribute,
 	deleteAttribute,
-	getAllAttributeByProducctId,
+	getAllAttribute,
 	getAttributeById,
 	restoreAttribute,
 	softDeleteAttribute,
 	updateAttribute,
 } from "./attribute.controller";
-import validBodyRequest from "../../common/middlewares/validBodyRequest";
 import { attributeSchema } from "./attribute.schema";
 
 const attributeRoutes = Router();
 
-attributeRoutes.get("/productId/:productId", getAllAttributeByProducctId);
+attributeRoutes.get("/", getAllAttribute);
 attributeRoutes.get("/:id", getAttributeById);
 
 // * Role: Admin
