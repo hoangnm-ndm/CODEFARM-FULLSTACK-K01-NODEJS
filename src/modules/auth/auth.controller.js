@@ -13,6 +13,8 @@ import {
 } from "../../common/configs/environments.js";
 import sendEmail from "../../common/utils/mailSender.js";
 
+import { createCartForUser } from "../cart/cart.service.js";
+
 export const authRegister = handleAsync(async (req, res, next) => {
 	const { email, password } = req.body;
 	const existingUser = await User.findOne({ email });
@@ -53,6 +55,10 @@ export const authRegister = handleAsync(async (req, res, next) => {
       Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!
   `
 	);
+
+	// * Thêm giỏ hàng mặc định cho người dùng
+	const cart = await createCartForUser(newUser._id);
+	console.log(cart);
 
 	// * Response
 	newUser.password = undefined;
