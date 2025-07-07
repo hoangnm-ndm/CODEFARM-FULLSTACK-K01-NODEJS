@@ -69,6 +69,11 @@ export const authLogin = handleAsync(async (req, res, next) => {
 	const isMatch = bcrypt.compareSync(password, existingUser.password);
 	if (!isMatch) return next(createError(400, MESSAGES.AUTH.LOGIN_FAILED));
 
+	const isVerifyEmail = existingUser.isVerifyEmail || false;
+	if (!isVerifyEmail) {
+		return next(createError(400, MESSAGES.AUTH.EMAIL_NOT_VERIFIED));
+	}
+
 	const accessToken = jwt.sign({ id: existingUser._id }, JWT_SECRET_KEY, { expiresIn: JWT_EXPIRES_IN });
 
 	if (accessToken) {

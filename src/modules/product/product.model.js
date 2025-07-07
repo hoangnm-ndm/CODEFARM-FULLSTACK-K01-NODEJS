@@ -17,9 +17,12 @@ const productSchema = new mongoose.Schema(
 		tags: { type: [String], default: [] },
 		variants: [
 			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "ProductVariant",
-				required: true,
+				size: { type: String, required: true, enum: ["S", "M", "L", "XL", "XXL"] },
+				color: { type: String, required: true, enum: ["Red", "Blue", "Green", "Black", "White", "Orange"] },
+				price: { type: Number, required: true },
+				stock: { type: Number, required: true },
+				sku: { type: String, required: true, unique: true },
+				images: { type: [String], default: [] },
 			},
 		],
 		deletedAt: { type: Date, default: null },

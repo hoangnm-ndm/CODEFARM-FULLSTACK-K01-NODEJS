@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { size } from "zod/v4";
 
 const productSchema = new mongoose.Schema(
 	{
@@ -18,17 +17,11 @@ const productSchema = new mongoose.Schema(
 		tags: { type: [String], default: [] },
 		variants: [
 			{
-				size: { type: String, required: true, enum: ["S", "M", "L", "XL", "XXL"] },
-				color: { type: String, required: true, enum: ["Red", "Blue", "Green", "Black", "White", "Orange"] },
-				weight: { type: Number, required: true },
-				price: { type: Number, required: true },
-				stock: { type: Number, required: true },
-				sku: { type: String, required: true, unique: true },
-				images: { type: [String], default: [] },
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "ProductVariant",
+				required: true,
 			},
 		],
-		// * Khó CRUD các thuộc tính, khó CRUD các giá trị của thuộc tính
-		// * Ưu điểm: Ngắn, ít code, dễ đọc, dễ hiểu.
 		deletedAt: { type: Date, default: null },
 		deletedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 	},
