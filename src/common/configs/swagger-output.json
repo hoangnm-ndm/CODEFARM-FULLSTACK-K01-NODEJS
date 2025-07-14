@@ -321,6 +321,11 @@
             "type": "string"
           },
           {
+            "name": "status",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "name": "orderCode",
             "in": "query",
             "type": "string"

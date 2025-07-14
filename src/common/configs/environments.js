@@ -12,6 +12,7 @@ export const {
   DB_URI,
   HOST,
   PORT,
+  NGROK_AUTH_TOKEN,
   JWT_SECRET_KEY,
   JWT_EXPIRES_IN,
   EMAIL_USER,
